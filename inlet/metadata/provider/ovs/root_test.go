@@ -17,16 +17,15 @@ type mockClient struct {
 	ch   chan ovsclient.TableUpdates
 }
 
-func (m *mockClient) MonitorAll(ctx context.Context, tables []string) (<-chan ovsclient.TableUpdates, error) {
+func (m *mockClient) MonitorAll(_ context.Context, _ []string) (<-chan ovsclient.TableUpdates, error) {
 	return m.ch, nil
 }
-func (m *mockClient) List(ctx context.Context, table string, out interface{}) error { return nil }
-func (m *mockClient) Close()                                                        {}
-
+func (m *mockClient) List(_ context.Context, _ string, _ interface{}) error { return nil }
+func (m *mockClient) Close()                                                {}
 func TestQueryAndWatch(t *testing.T) {
 	updates := make(chan ovsclient.TableUpdates, 1)
 	mc := &mockClient{ch: updates}
-	newClient = func(cfg Configuration) (ovsclient.Client, error) { return mc, nil }
+	newClient = func(_ Configuration) (ovsclient.Client, error) { return mc, nil }
 	r := reporter.NewMock(t)
 	var got []provider.Update
 	p, err := Configuration{}.New(r, func(u provider.Update) { got = append(got, u) })

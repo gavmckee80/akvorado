@@ -1,3 +1,4 @@
+// Package client defines a minimal libovsdb client interface used in tests.
 package client
 
 import "context"
@@ -23,6 +24,7 @@ type Client interface {
 	Close()
 }
 
+// Option represents a configuration option for NewOVSDBClient.
 type Option interface{}
 
 // NewOVSDBClient is a stub constructor used in tests.

@@ -1,3 +1,4 @@
+// Package ovs implements a metadata provider backed by OVSDB.
 package ovs
 
 import "akvorado/inlet/metadata/provider"
