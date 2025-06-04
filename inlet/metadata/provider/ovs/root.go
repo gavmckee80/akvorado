@@ -1,3 +1,4 @@
+// Package ovs implements a metadata provider backed by OVSDB.
 package ovs
 
 import (
@@ -11,7 +12,7 @@ import (
 )
 
 // newClient is used to create a new OVSDB client. It is overridden in tests.
-var newClient = func(cfg Configuration) (ovsclient.Client, error) {
+var newClient = func(_ Configuration) (ovsclient.Client, error) {
 	return ovsclient.NewOVSDBClient()
 }
 
